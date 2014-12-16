@@ -1,0 +1,18 @@
+
+Doesn't scan the unicode allowed symbols correctly : ×, "<=" in one char, etc.
+
+Doesn't parse while <expression> do <stuff> properly - it can't find the "do" on the next line
+Thus, perhaps, it can't deal with line-ends well?
+Similarly, not sure it's dealing with whitespace properly.
+
+Probably doesn't parse (and maybe not scan?) things in quotation marks correctly.
+
+nextString() is never defined, and probably not even what I want in nextCodeStatement().  code statement looks to be assembly, so scanner+parser should maybe work together to grab it all as one string
+
+So presumably scanner isn't scanning strings properly, as it's grabbing things 1 at a time as tokens
+
+The nextToken() at the beginning of nextProgram() in Parser should not be there, but appears to make the code work better.  Presumably this means I'm missing nextToken() at the end of other methods, or missing cases on how to begin a program.
+
+Couple methods from Homework 1 have not been properly implemented, and are instead kludged in as part of nextToken()
+
+Not positive my scheme for type checking works - I set it inside nextDeclaration(), so theoretically it should be caught for all the various cases (in global, in nextProcedure, etc).
